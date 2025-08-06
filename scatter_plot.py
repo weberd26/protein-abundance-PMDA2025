@@ -1,0 +1,16 @@
+y_test_pred = best_model.predict(X_test)
+mae = mean_absolute_error(y_test, y_test_pred)
+r2 = r2_score(y_test, y_test_pred)
+mse = mean_squared_error(y_test, y_test_pred)
+print(f"{model_name} | Test MAE: {mae:.3f}, R²: {r2:.3f}, MSE: {mse:.3f}", file=log_file)
+
+# Plot results
+plt.figure()
+plt.scatter(y_test, y_test_pred, alpha=0.6)
+plt.xlabel(f"True {target_column}")
+plt.ylabel(f"Predicted {target_column}")
+plt.title(f"{model_name} on Scaffold-Split Test Set")
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'r--')
+plt.grid(True)
+plt.savefig(plot_filename, dpi=300)
+plt.close()
